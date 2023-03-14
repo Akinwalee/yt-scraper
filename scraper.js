@@ -1,7 +1,10 @@
 import { launch } from 'puppeteer';
 
 const getVideos = async (url) => {
-	const browser = await launch();
+	const browser = await launch({
+		// timeout: 50000,
+		// args: [ '--proxy-server=213.149.182.98:8080' ]
+	});
 
 	const page = await browser.newPage();
 
@@ -23,10 +26,10 @@ const getVideos = async (url) => {
 	return Array.from(document.querySelectorAll("#metadata #metadata-line > span:nth-child(3)")).map(v => v.textContent);
 	});
 
-	const videoAges = await page.evaluate(() => {
+	const videoAge = await page.evaluate(() => {
 	return Array.from(document.querySelectorAll("#metadata #metadata-line > span:nth-child(4)")).map(a => a.textContent)});
 
-	const channelData = titles.map((elem, index) => [elem, links[index], channels[index], views[index], videoAges[index]])
+	const channelData = titles.map((elem, index) => [elem, links[index], channels[index], views[index], videoAge[index]])
 	console.log(channelData);
 
 	await browser.close();
