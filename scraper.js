@@ -1,7 +1,7 @@
-const pup = require('puppeteer');
+import { launch } from 'puppeteer';
 
-(async (url) => {
-	const browser = await pup.launch();
+const getVideos = async (url) => {
+	const browser = await launch();
 
 	const page = await browser.newPage();
 
@@ -30,4 +30,6 @@ const pup = require('puppeteer');
 	console.log(channelData);
 
 	await browser.close();
-})('https://www.youtube.com/results?search_query=Best+travel+destinations')
+}
+
+getVideos('https://www.youtube.com/results?search_query=Best+travel+destinations')
