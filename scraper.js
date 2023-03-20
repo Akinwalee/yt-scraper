@@ -26,10 +26,10 @@ const getVideos = async (url) => {
 	return Array.from(document.querySelectorAll("#metadata #metadata-line > span:nth-child(3)")).map(v => v.textContent);
 	});
 
-	const videoAge = await page.evaluate(() => {
+	const videoAges = await page.evaluate(() => {
 	return Array.from(document.querySelectorAll("#metadata #metadata-line > span:nth-child(4)")).map(a => a.textContent)});
 
-	const channelData = titles.map((elem, index) => [elem, links[index], channels[index], views[index], videoAge[index]])
+	const channelData = titles.map((elem, index) => [elem, links[index], channels[index], views[index], videoAges[index]])
 	console.log(channelData);
 
 	await browser.close();
